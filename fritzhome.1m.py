@@ -22,7 +22,12 @@ from fritzhome.fritz import FritzBox
 HOSTNAME="fritz.box"
 USERNAME="smarthome"
 PASSWORD=""
-assert PASSWORD , "edit this file and set USERNAME and PASSWORD for your fritz.box"
+if not PASSWORD:
+    print("ERROR| color=red")
+    print("---")
+    print("edit the plugin and set USERNAME and PASSWORD for your fritz box|color=red")
+    print("file: " + os.path.abspath(__file__) + "|color=red")
+    sys.exit(1)
 
 def main(device=None, action=None):
     parser = argparse.ArgumentParser(description='fritzhome devices')
