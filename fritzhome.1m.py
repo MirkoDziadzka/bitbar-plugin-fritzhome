@@ -3,6 +3,9 @@
 # <bitbar.author></bitbar.author>
 # <bitbar.author.github>MirkoDziadzka</bitbar.author.github>
 # <bitbar.desc>See Status of Fritz devices</bitbar.desc>
+# <bitbar.dependencies>python,fritzhome</bitbar.dependencies>
+# <bitbar.abouturl>https://github.com/MirkoDziadzka/bitbar-plugin-fritzhome</bitbar.abouturl>
+
 
 import sys
 import os
