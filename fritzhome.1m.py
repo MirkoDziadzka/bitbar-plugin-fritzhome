@@ -1,4 +1,4 @@
-#!/Users/mirko/fritz.env/bin/python
+#!/usr/bin/env python
 # <bitbar.title>Fritz Dect Devices</bitbar.title>
 # <bitbar.author></bitbar.author>
 # <bitbar.author.github>MirkoDziadzka</bitbar.author.github>
