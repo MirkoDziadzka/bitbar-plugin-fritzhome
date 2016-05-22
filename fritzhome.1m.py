@@ -4,8 +4,7 @@
 # <bitbar.author.github>MirkoDziadzka</bitbar.author.github>
 # <bitbar.desc>See Status of Fritz devices</bitbar.desc>
 # <bitbar.dependencies>python,fritzhome</bitbar.dependencies>
-# <bitbar.abouturl>https://github.com/MirkoDziadzka/bitbar-plugin-fritzhome</bitbar.abouturl>
-
+# <bitbar.abouturl>https://github.com/MirkoDziadzka/bitbar-plugin-fritzhomebitbar.abouturl>
 
 import sys
 import os
@@ -19,6 +18,7 @@ import urllib
 from fritzhome.actor import Actor
 from fritzhome.fritz import FritzBox
 
+# see the README.md for username and password
 HOSTNAME="fritz.box"
 USERNAME="smarthome"
 PASSWORD=""
@@ -37,7 +37,11 @@ def main(device=None, action=None):
     args = parser.parse_args()
 
     box = FritzBox(HOSTNAME, USERNAME, PASSWORD)
-    box.login()
+    try:
+        box.login()
+    except Exception as e:
+        print(str(e))
+        sys.exit(1)
 
     if args.device is not None:
         actor = box.get_actor_by_ain(urllib.unquote(args.device))
