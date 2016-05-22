@@ -19,15 +19,24 @@ from fritzhome.actor import Actor
 from fritzhome.fritz import FritzBox
 
 # see the README.md for username and password
-HOSTNAME="fritz.box"
-USERNAME="smarthome"
-PASSWORD=""
+HOSTNAME = "fritz.box"
+USERNAME = "smarthome"
+PASSWORD = ""
 if not PASSWORD:
     print("ERROR| color=red")
     print("---")
     print("edit the plugin and set USERNAME and PASSWORD for your fritz box|color=red")
     print("file: " + os.path.abspath(__file__) + "|color=red")
     sys.exit(1)
+
+
+def make_call(prog, *args):
+    res = []
+    res.append('bash="{0}"'.format(prog))
+    for i, arg in enumerate(args):
+        res.append('param{0}="{1}"'.format(i + 1, arg))
+    return " ".join(res)
+
 
 def main(device=None, action=None):
     parser = argparse.ArgumentParser(description='fritzhome devices')
@@ -62,7 +71,7 @@ def main(device=None, action=None):
         else:
             actors_on.append(actor)
             total_power += power
-    
+
     if actors_on:
         print("%d On (%d W)| color=red" % (len(actors_on), power / 1000))
     else:
@@ -70,14 +79,12 @@ def main(device=None, action=None):
     print("---")
     for actor in actors_on:
         text = "{1} ({0}) is using {2} W - switch off".format(actor.actor_id, actor.name, actor.get_power() / 1000)
-        action = "bash={0} param1=--device param2={1} param3=--action param4=off terminal=false refresh=true".format(sys.argv[0], urllib.quote(actor.actor_id))
-        print("%s|%s" % (text, action))
+        action = make_call(sys.argv[0], "--device", urllib.quote(actor.actor_id), "--action", "off")
+        print("%s|%s terminal=false refresh=true" % (text, action))
     for actor in actors_off:
         text = "switch {1} ({0}) on".format(actor.actor_id, actor.name)
-        action = "bash={0} param1=--device param2={1} param3=--action param4=on terminal=false refresh=true".format(sys.argv[0], urllib.quote(actor.actor_id))
-        print("%s|%s" % (text, action))
-
-
+        action = make_call(sys.argv[0], "--device", urllib.quote(actor.actor_id), "--action", "on")
+        print("%s|%s terminal=false refresh=true" % (text, action))
 
 
 if __name__ == '__main__':
