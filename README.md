@@ -1,5 +1,5 @@
 # bitbar-plugin-fritzhome
-fritzhome plugin for BitBar
+fritzhome plugin for BitBar (see https://github.com/matryer/bitbar)
 
 This is a very simple plugin to access you FritzBox Home autmation interface.
 
