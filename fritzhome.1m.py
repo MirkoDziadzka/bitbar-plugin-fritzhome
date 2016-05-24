@@ -4,7 +4,7 @@
 # <bitbar.author.github>MirkoDziadzka</bitbar.author.github>
 # <bitbar.desc>See Status of Fritz devices</bitbar.desc>
 # <bitbar.dependencies>python,fritzhome</bitbar.dependencies>
-# <bitbar.abouturl>https://github.com/MirkoDziadzka/bitbar-plugin-fritzhomebitbar.abouturl>
+# <bitbar.abouturl>https://github.com/MirkoDziadzka/bitbar-plugin-fritzhome<bitbar.abouturl>
 
 import sys
 import os
@@ -73,7 +73,7 @@ def main(device=None, action=None):
             total_power += power
 
     if actors_on:
-        print("%d On (%d W)| color=red" % (len(actors_on), power / 1000))
+        print("%d On (%d W)| color=red" % (len(actors_on), total_power / 1000))
     else:
         print("All Off| color=green")
     print("---")
