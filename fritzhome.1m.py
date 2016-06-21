@@ -62,11 +62,14 @@ def main(device=None, action=None):
 
     actors_on = []
     actors_off = []
+    actors_offline = []
     total_power = 0
 
     for actor in sorted(box.get_actors(), key=lambda a: a.actor_id):
         power = actor.get_power()
-        if power == 0:
+        if power is None:
+            actors_offline.append(actor)
+        elif power == 0:
             actors_off.append(actor)
         else:
             actors_on.append(actor)
